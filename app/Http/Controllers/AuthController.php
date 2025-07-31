@@ -39,4 +39,18 @@ class AuthController extends Controller
             return response()->json(['error' => 'Registration failed'], 500);
         }
     }
+    // Other methods like login, logout, etc. can be added here
+    public function login(Request $request)
+    {
+        // Implement login logic here
+         $validated = Validator::make(request()->all(), [
+
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:8',
+        ]);
+        if ($validated->fails()) {
+            return response()->json(['errors' => $validated->errors()], 400);
+        }
+
+    }
 }
